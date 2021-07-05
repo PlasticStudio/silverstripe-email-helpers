@@ -15,9 +15,6 @@
 		"pelago/emogrifier": "v5.0",
 		"phpmailer/phpmailer": "^v6.5"
 	},
-	"require-dev": {
-		"phpunit/PHPUnit": "3.7.*@stable"
-	},
 	"extra": {
 		"installer-name": "email-helpers"
     }

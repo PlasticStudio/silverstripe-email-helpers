@@ -1,4 +1,11 @@
 <?php
+
+namespace MarkGuinn\EmailHelpers;
+
+use SilverStripe\Core\Config\Config;
+use MarkGuinn\EmailHelpers\InlineCSS;
+use SilverStripe\Control\Email\Mailer;
+use PHPMailer\PHPMailer\PHPMailer;
 /**
  * This is a simple extension of the built in SS email class
  * that uses the PHPMailer library to send emails via mail() and Emogifier to inline CSS.

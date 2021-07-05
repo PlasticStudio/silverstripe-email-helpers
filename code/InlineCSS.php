@@ -1,5 +1,9 @@
 <?php
+
+namespace MarkGuinn\EmailHelpers;
+
 use Pelago\Emogrifier;
+use SilverStripe\Control\Director;
 
 /**
  * Inline CSS

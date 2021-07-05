@@ -1,4 +1,11 @@
 <?php
+
+namespace MarkGuinn\EmailHelpers\Tasks;
+
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Security\Permission;
+use MarkGuinn\EmailHelpers\StyledHtmlEmail;
 /**
  * Sends a test email to verify that they're going through.
  *

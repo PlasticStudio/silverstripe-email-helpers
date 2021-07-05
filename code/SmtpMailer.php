@@ -1,5 +1,11 @@
 <?php
 
+namespace MarkGuinn\EmailHelpers;
+
+use SilverStripe\Dev\Deprecation;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\Email\Mailer;
+
 /**
  * This is a simple extension of the built in SS email class
  * that uses the PHPMailer library to send emails via SMTP.

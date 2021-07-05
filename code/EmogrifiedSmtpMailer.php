@@ -1,4 +1,11 @@
 <?php
+
+namespace MarkGuinn\EmailHelpers;
+
+use Psr\Log\LoggerInterface;
+use SilverStripe\Core\Config\Config;
+use MarkGuinn\EmailHelpers\InlineCSS;
+use SilverStripe\Core\Injector\Injector;
 /**
  * This is a simple extension of the built in SS email class
  * that uses the PHPMailer library to send emails via SMTP and Emogifier to inline CSS.
@@ -156,7 +163,7 @@ class EmogrifiedSmtpMailer extends SmtpMailer
             $mail->SMTPDebug = $level;
             $mail->Debugoutput = function ($str, $level)
             {
-                SS_Log::log(print_r($str, true), SS_Log::NOTICE);
+                Injector::inst()->get(LoggerInterface::class)->notice(print_r($str, true));
             };
         }
 
@@ -165,7 +172,7 @@ class EmogrifiedSmtpMailer extends SmtpMailer
             return array($to, $subject, $mail->Body, $customheaders);
         } else {
             if ($this->getLogfailedemail()) {
-                SS_Log::log(print_r($mail->ErrorInfo, true), SS_Log::NOTICE);
+                Injector::inst()->get(LoggerInterface::class)->notice(print_r($mail->ErrorInfo, true));
             }
             return false;
         }
