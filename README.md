@@ -16,7 +16,9 @@ attributes on the actual html tags to promote better compatibility across
 email clients.
 
 ## Requirements
-Silverstripe 3.0+
+For Silverstripe 4.0+ projects use release line 12.X or ss4 branch.
+
+For Silverstripe 3.0+ projects use release line 1.X or ss3 branch.
 
 ## Installation
 Install via composer:
