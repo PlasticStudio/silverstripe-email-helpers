@@ -12,7 +12,7 @@
 	],
 	"require": {
 		"silverstripe/framework": "^4.0",
-		"pelago/emogrifier": "^2.0",
+		"pelago/emogrifier": "v5.0",
 		"phpmailer/phpmailer": "^5.2.20"
 	},
 	"require-dev": {
