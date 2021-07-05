@@ -3,7 +3,10 @@
 namespace MarkGuinn\EmailHelpers;
 
 use Pelago\Emogrifier;
+use Pelago\Emogrifier\CssInliner;
 use SilverStripe\Control\Email\Email;
+use Pelago\Emogrifier\HtmlProcessor\HtmlPruner;
+use Pelago\Emogrifier\HtmlProcessor\CssToAttributeConverter;
 
 /**
  * Same as the normal system email class, but runs the content through
@@ -41,8 +44,14 @@ class StyledHtmlEmail extends Email
                 $this->body
             );
 
-            $emog = new Emogrifier($html, $css);
-            $this->body = $emog->emogrify();
+            // $emog = new Emogrifier($html, $css);
+            // $this->body = $emog->emogrify();
+            // $this->sbody = CssInliner::fromHtml($html)->inlineCss()->render();
+            $domDocument = CssInliner::fromHtml($html)->inlineCss($css)->getDomDocument();
+
+            HtmlPruner::fromDomDocument($domDocument)->removeElementsWithDisplayNone();
+            $this->body = CssToAttributeConverter::fromDomDocument($domDocument)
+                ->convertCssToVisualAttributes()->render();
         }
 
         return $this;

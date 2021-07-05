@@ -5,6 +5,7 @@ namespace MarkGuinn\EmailHelpers;
 use SilverStripe\Dev\Deprecation;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\Email\Mailer;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * This is a simple extension of the built in SS email class

@@ -2,8 +2,10 @@
 
 namespace MarkGuinn\EmailHelpers;
 
-use Pelago\Emogrifier;
+use Pelago\Emogrifier\CssInliner;
 use SilverStripe\Control\Director;
+use Pelago\Emogrifier\HtmlProcessor\HtmlPruner;
+use Pelago\Emogrifier\HtmlProcessor\CssToAttributeConverter;
 
 /**
  * Inline CSS
@@ -17,9 +19,10 @@ class InlineCSS
      * @param string $cssFile path and filename
      * @return HTML with inlined CSS
      */
-    public static function convert($htmlContent, $cssfile)
+    public static function convert($html, $cssfile)
     {
-        $emog = new Emogrifier($htmlContent);
+        // $emog = new Emogrifier($htmlContent);
+        
 
         // Apply the css file to Emogrifier
         if ($cssfile) {
@@ -27,10 +30,18 @@ class InlineCSS
             $cssFileHandler = fopen($cssFileLocation, 'r');
             $css = fread($cssFileHandler, filesize($cssFileLocation));
             fclose($cssFileHandler);
+            // $emog->setCss($css);
 
-            $emog->setCss($css);
+            $domDocument = CssInliner::fromHtml($html)->inlineCss($css)->getDomDocument();
+            HtmlPruner::fromDomDocument($domDocument)->removeElementsWithDisplayNone();
+            $html = CssToAttributeConverter::fromDomDocument($domDocument)
+                ->convertCssToVisualAttributes()->render();
+        }
+        else {
+            $html = CssInliner::fromHtml($html)->inlineCss()->render();
         }
 
-        return $emog->emogrify();
+        return $html;
+        // return $emog->emogrify();
     }
 }
